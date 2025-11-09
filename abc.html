@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Научный сайт</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+
+            /* Статичный цветной градиентный фон */
+            background:  linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%);
+             background-blend-mode: overlay;
+            background-size: cover, 400px 400px, 350px 350px, 300px 300px;
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 3px solid;
+            border-image: linear-gradient(90deg, #2196F3, #9C27B0, #4CAF50) 1;
+            padding-bottom: 15px;
+            font-size: 2.2em;
+        }
+
+        h2 {
+            color: #34495e;
+            margin-top: 35px;
+            padding: 10px 15px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, rgba(33, 150, 243, 0.1), rgba(156, 39, 176, 0.1));
+            border-left: 5px solid;
+            border-image: linear-gradient(180deg, #2196F3, #9C27B0) 1;
+        }
+
+        p {
+            margin-bottom: 20px;
+            text-align: justify;
+            font-size: 1.05em;
+        }
+
+        ul {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(248, 248, 248, 0.9));
+            padding: 25px 35px;
+            border-radius: 12px;
+
+border-left: 5px solid #4CAF50;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        li {
+            margin-bottom: 12px;
+            padding-left: 10px;
+            font-size: 1.05em;
+        }
+
+        .formula {
+            font-family: 'Cambria', 'Times New Roman', serif;
+            font-style: italic;
+            font-weight: bold;
+            padding: 8px 15px;
+            border-radius: 8px;
+            display: inline-block;
+            margin: 5px 3px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Разные цвета для формул */
+        .formula-physics { background: linear-gradient(135deg, #E3F2FD, #BBDEFB); color: #1565C0; }
+        .formula-math { background: linear-gradient(135deg, #F3E5F5, #E1BEE7); color: #7B1FA2; }
+        .formula-geometry { background: linear-gradient(135deg, #E8F5E8, #C8E6C9); color: #2E7D32; }
+        .formula-calculus { background: linear-gradient(135deg, #FFF3E0, #FFE0B2); color: #EF6C00; }
+        .formula-complex { background: linear-gradient(135deg, #FFEBEE, #FFCDD2); color: #C62828; }
+
+        .formula-block {
+            font-family: 'Cambria', 'Times New Roman', serif;
+            font-style: italic;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(245, 245, 245, 0.9));
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            text-align: center;
+            border: 2px solid;
+            border-image: linear-gradient(90deg, #2196F3, #9C27B0, #4CAF50) 1;
+            font-size: 1.2em;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 25px;
+            border-radius: 12px;
+            margin: 30px 0;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        .contact-info {
+            background: linear-gradient(135deg, rgba(33, 150, 243, 0.05), rgba(76, 175, 80, 0.05));
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid rgba(33, 150, 243, 0.2);
+        }
+
+        .color-legend {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .color-item {
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+

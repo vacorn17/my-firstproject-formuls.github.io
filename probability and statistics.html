@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Вероятность и статистика</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+
+            /* Статичный цветной градиентный фон */
+            background: linear-gradient(135deg,
+                #e3f2fd 0%,
+                #f3e5f5 25%,
+                #e8f5e8 50%,
+                #fff3e0 75%,
+                #ffebee 100%);
+
+            /* Формулы с разными цветами - статичные */
+            background-image:
+                url("data:image/svg+xml,%3Csvg width='200' height='200' viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cg opacity='0.15'%3E%3Ctext x='20' y='30' font-family='Cambria, serif' font-size='12' fill='%232196F3'%3EE=mc²%3C/text%3E%3Ctext x='150' y='50' font-family='Cambria, serif' font-size='14' fill='%237B1FA2'%3E∇⋅E=ρ/ε₀%3C/text%3E%3Ctext x='40' y='80' font-family='Cambria, serif' font-size='10' fill='%234CAF50'%3Ea²+b²=c²%3C/text%3E%3Ctext x='120' y='100' font-family='Cambria, serif' font-size='11' fill='%23FF9800'%3EF=ma%3C/text%3E%3Ctext x='30' y='120' font-family='Cambria, serif' font-size='13' fill='%23F44336'%3Eeⁱπ+1=0%3C/text%3E%3Ctext x='140' y='140' font-family='Cambria, serif' font-size='12' fill='%23009688'%3E∫f(x)dx%3C/text%3E%3Ctext x='50' y='160' font-family='Cambria, serif' font-size='11' fill='%23FF5722'%3E∂u/∂t%3C/text%3E%3Ctext x='130' y='180' font-family='Cambria, serif' font-size='10' fill='%235C6BC0'%3E∑xₙ%3C/text%3E%3C/g%3E%3C/svg%3E"),
+                url("data:image/svg+xml,%3Csvg width='180' height='180' viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cg opacity='0.12'%3E%3Ctext x='80' y='40' font-family='Cambria, serif' font-size='12' fill='%239C27B0'%3Eψ=ψ(x,t)%3C/text%3E%3Ctext x='160' y='70' font-family='Cambria, serif' font-size='11' fill='%23007C91'%3EF=GmM/r²%3C/text%3E%3Ctext x='25' y='60' font-family='Cambria, serif' font-size='13' fill='%238BC34A'%3E∇×E=−∂B/∂t%3C/text%3E%3Ctext x='100' y='130' font-family='Cambria, serif' font-size='10' fill='%23E91E63'%3Elim x→∞%3C/text%3E%3Ctext x='170' y='110' font-family='Cambria, serif' font-size='12' fill='%23009688'%3Eσ=εE%3C/text%3E%3Ctext x='60' y='150' font-family='Cambria, serif' font-size='11' fill='%23FF6D00'%3Eħ²/2m∇²ψ%3C/text%3E%3Ctext x='140' y='30' font-family='Cambria, serif' font-size='10' fill='%233F51B5'%3E∮E·dA%3C/text%3E%3C/g%3E%3C/svg%3E");
+            background-size: 250px 250px, 220px 220px;
+            background-blend-mode: multiply;
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 3px solid;
+            border-image: linear-gradient(90deg, #2196F3, #9C27B0, #4CAF50) 1;
+            padding-bottom: 15px;
+            font-size: 2.2em;
+        }
+
+        h2 {
+            color: #34495e;
+            margin-top: 35px;
+            padding: 10px 15px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, rgba(33, 150, 243, 0.1), rgba(156, 39, 176, 0.1));
+            border-left: 5px solid;
+            border-image: linear-gradient(180deg, #2196F3, #9C27B0) 1;
+        }
+
+        p {
+            margin-bottom: 20px;
+            text-align: justify;
+            font-size: 1.05em;
+        }
+
+        ul {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(248, 248, 248, 0.9));
+            padding: 25px 35px;
+            border-radius: 12px;
+
+border-left: 5px solid #4CAF50;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        li {
+            margin-bottom: 12px;
+            padding-left: 10px;
+            font-size: 1.05em;
+        }
+
+        .formula {
+            font-family: 'Cambria', 'Times New Roman', serif;
+            font-style: italic;
+            font-weight: bold;
+            padding: 8px 15px;
+            border-radius: 8px;
+            display: inline-block;
+            margin: 5px 3px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Разные цвета для формул */
+        .formula-physics { background: linear-gradient(135deg, #E3F2FD, #BBDEFB); color: #1565C0; }
+        .formula-math { background: linear-gradient(135deg, #F3E5F5, #E1BEE7); color: #7B1FA2; }
+        .formula-geometry { background: linear-gradient(135deg, #E8F5E8, #C8E6C9); color: #2E7D32; }
+        .formula-calculus { background: linear-gradient(135deg, #FFF3E0, #FFE0B2); color: #EF6C00; }
+        .formula-complex { background: linear-gradient(135deg, #FFEBEE, #FFCDD2); color: #C62828; }
+
+        .formula-block {
+            font-family: 'Cambria', 'Times New Roman', serif;
+            font-style: italic;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(245, 245, 245, 0.9));
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            text-align: center;
+            border: 2px solid;
+            border-image: linear-gradient(90deg, #2196F3, #9C27B0, #4CAF50) 1;
+            font-size: 1.2em;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 25px;
+            border-radius: 12px;
+            margin: 30px 0;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        .contact-info {
+            background: linear-gradient(135deg, rgba(33, 150, 243, 0.05), rgba(76, 175, 80, 0.05));
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid rgba(33, 150, 243, 0.2);
+        }
+
+        .color-legend {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .color-item {
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<h1><font size="10">Формулы по вероятности и статистике</font></h1>
+<p><font size="10">Классическое определение вероятности<br></font>
+<font size="5">Вероятность наступления события А в некотором испытании:<br></font>
+• <font size="5">P(A) = m/n   , где n - общее число всех равновозможных, элементарных исходов этого испытания, m - количество элементарных исходов, благоприятствующих событию A<br></font><br>
+
+<font size="10">Полная группа событий<br></font>
+<font size="5">Сумма вероятностей событий А₁, А₂, А₃ .... А ₙ, образующих полную группу, равна единице:<br></font>
+• <font size="5">P(А₁) + P(А₂) + P(А₃) + ... + P(Aₙ) = 1<br></font><br>
+
+<font size="10">Теорема сложения вероятностей противоположных событий<br></font>
+<font size="5">Сумма вероятностей противоположных событий А, ⁻А равна единице:<br></font>
+• <font size="5">P(A) + P(⁻A) = 1<br></font><br>
+
+<font size="10">Теорема сложения вероятностей несовместных событий<br></font>
+<font size="5">Вероятность появления одного из двух несовместных событий А или В (без разницы какого) равна сумме вероятностей этих событий:<br></font>
+• <font size="5">P(A + B) = P(A) + P(B)<br></font>
+<font size="5">Аналогичный факт справедлив и для большего количества несовместных событий, например, для трёх:<br></font>
+• <font size="5">P(A + B + C) = P(A) + P(B) + P(C)<br></font><br>
+
+<font size="10">Теорема сложения вероятностей совместных событий<br></font>
+<font size="5">Вероятность появления хотя бы одного из двух совместных событий A, В равна сумме вероятностей этих событий без вероятности их совместного появления:<br></font>
+• <font size="5">P(A + B) = P(A) + P(B) - P(AB)<br></font><br>
+
+<font size="10">Теорема умножения вероятностей независимых событий<br></font>
+<font size="5">Вероятность совместного появления двух независимых событий А и В равна произведению вероятностей этих событий:<br></font>
+• <font size="5">P(AB) = P(A) • P(B)<br></font>
+<font size="5">Данный факт справедлив и для большего количества событий, например, для трёх:<br></font>
+• <font size="5">P(ABC) = P(A) * P(B) * P(C)<br></font><br>
+
+<font size="10">Теорема умножения вероятностей зависимых событий<br></font>
+<font size="5">Вероятность совместного появления двух зависимых событий равна произведению вероятности одного события на условную вероятность другого события:<br></font>
+• <font size="5">Р(AB) = P(А) *  Рₐ(B), где Рₐ(В) - вероятность появления события В при условии, что событие А уже произошло<br></font>
+<font size="5">Данный факт справедлив и для большего количества событий, например, для трёх:<br></font>
+• <font size="5">P(ABC) = P(A) * Pₐ(B) * Pав(C), где Рав(С) - вероятность появления события С при условии, что события А и В уже произошли<br></font><br>
+
+<font size="10">Формула полной вероятности<br></font>
+<font size="5">Вероятность события A, которое может наступить лишь при условии появления одного из несовместных событий B₁, B₂, B₃, ..., Bₙ, образующих полную группу, равна сумме произведений вероятностей каждого из этих событий на соответствующие условные вероятности события A:<br></font>
+• <font size="5">P(A) = P(B₁) * PB₁(A) + P(B₂) * PB₂(A) + P(B₃) * PB₃(A) + … + P(Bₙ) * PBₙ(A)<br></font><br>
+
+<font size="10">Формулы Байеса<br></font>
+<font size="5">Пусть в результате осуществления одной из гипотез B₁, B₂, B₃, ..., Bₙ  событие A произошло. Тогда:<br></font>
+• <font size="5">Pₐ(B₁)  =  (P(B1) * PB1(A)) / P(A) — вероятность того, что имела место гипотеза  B₁<br></font>
+• <font size="5">PA(B2)  =  (P(B₂) * PB₂(A)) / P(A) — вероятность того, что имела место гипотеза  B₂<br></font>
+• <font size="5">PA(B₃)  =  (P(B₃) * PB₃(A)) / P(A) — вероятность того, что имела место гипотеза  B₃<br></font>
+• <font size="5">PA(Bₙ)  =  (P(Bₙ) * PBₙ(A)) / P(A) — вероятность того, что имела место гипотеза  Bₙ<br></font><br>
+
+<font size="10">Формула Бернулли<br></font>
+• <font size="5">Pₙₘ = Cₙₘ pm qn-m<br></font>
+<font size="5">n – количество независимых испытаний<br></font>
+<font size="5">p – вероятность появления события A в каждом испытании и q = 1 – p – вероятность непоявления<br></font>
+<font size="5">Pₙₘ – вероятность того, что в n испытаниях событие A появится ровно m раз<br></font>
+<font size="5">Cₙₘ – биномиальный коэффициент<br></font><br>
+    
+<font size="10">Формула Пуассона<br></font>
+• <font size="5">Pₙ(m) = (np<sup>m</sup>e<sup>-np</sup>)/m!<br></font>
+<font size="5">n – количество независимых испытаний<br></font>
+<font size="5">p – вероятность появления события A в каждом испытании<br></font>
+<font size="5">Pₙ(m) – вероятность того, что в n испытаниях событие A появится ровно m раз<br></font><br></p>
+    
+<font size="5"><a href="/math">Вернуться к математике</a><br>
+<a href="/subjects">Вернуться к предметам</a></font><br>
+</body>
+</html>
